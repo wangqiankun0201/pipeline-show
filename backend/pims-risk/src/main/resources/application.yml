@@ -1,0 +1,84 @@
+server:
+  port: 9103
+
+spring:
+  application:
+    name: pims-risk
+  profiles:
+    active: ${PIMS_PROFILE:local}
+  mvc:
+    pathmatch:
+      # springfox 3 兼容 Spring Boot 2.6
+      matching-strategy: ant_path_matcher
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 2MB
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  cloud:
+    nacos:
+      server-addr: ${NACOS_ADDR:nacos.dev.xnyqt.petrochina:8848}
+      username: ${NACOS_USERNAME:nacos}
+      password: ${NACOS_PASSWORD:}
+      discovery:
+        namespace: ${NACOS_NAMESPACE:pims}
+      config:
+        namespace: ${NACOS_NAMESPACE:pims}
+        file-extension: yaml
+        import-check:
+          enabled: false
+    sentinel:
+      transport:
+        dashboard: ${SENTINEL_DASHBOARD:}
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: org.postgresql.Driver
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/pims?currentSchema=pims_risk}
+    username: ${DB_USERNAME:pims}
+    password: ${DB_PASSWORD:}
+    druid:
+      initial-size: 2
+      min-idle: 2
+      max-active: 20
+      max-wait: 60000
+      validation-query: SELECT 1
+      test-while-idle: true
+  sql:
+    init:
+      mode: never
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    banner: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: never
+
+# 服务间调用：OpenFeign + Sentinel 熔断降级
+feign:
+  sentinel:
+    enabled: true
+  client:
+    config:
+      default:
+        connect-timeout: 5000
+        read-timeout: 30000
+
+pims:
+  swagger:
+    title: 失效风险计算服务 pims-risk
+  risk:
+    # 计算模型编码：PENDING 为占位模型（公式待接入）
+    model-code: PENDING
+    default-evaluate-years: 5
+    history-limit: 50

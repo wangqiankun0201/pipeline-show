@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  梦想云 PaaS 流水线 Maven 打包配置（规范要求 ruidao-settings.xml 位于系统服务根目录）。
+  流水线构建命令示例（在 backend 目录执行）：
+    mvn -s ruidao-settings.xml -pl pims-gis -am clean package -DskipTests
+  上线前将 url 替换为西南油气田 Maven 私服地址，凭据通过流水线环境变量注入，禁止明文写入。
+-->
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+    <servers>
+        <server>
+            <id>xnyqt-maven</id>
+            <username>${env.MAVEN_USERNAME}</username>
+            <password>${env.MAVEN_PASSWORD}</password>
+        </server>
+    </servers>
+
+    <mirrors>
+        <mirror>
+            <id>xnyqt-maven</id>
+            <name>西南油气田 Maven 私服</name>
+            <url>${env.MAVEN_MIRROR_URL}</url>
+            <mirrorOf>*</mirrorOf>
+        </mirror>
+    </mirrors>
+</settings>

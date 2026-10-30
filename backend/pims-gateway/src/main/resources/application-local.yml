@@ -1,0 +1,16 @@
+# 本地开发：不连接 Nacos，直连各服务端口，关闭用户中心鉴权
+spring:
+  cloud:
+    nacos:
+      discovery:
+        enabled: false
+      config:
+        enabled: false
+
+pims:
+  route:
+    gis-uri: http://localhost:9101
+    corrosion-uri: http://localhost:9102
+    risk-uri: http://localhost:9103
+  auth:
+    enabled: false

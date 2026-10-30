@@ -1,0 +1,45 @@
+{
+  "name": "pims-portal-web",
+  "version": "1.0.0",
+  "private": true,
+  "description": "管道完整性管理平台前端（梦想云 Vue3 + Ant-Design-Vue + TypeScript）",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "type-check": "vue-tsc --noEmit",
+    "lint": "eslint \"src/**/*.{ts,vue}\"",
+    "format": "prettier --write \"src/**/*.{ts,vue,less}\""
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@ant-design/icons-vue": "^7.0.1",
+    "ant-design-vue": "^4.2.6",
+    "axios": "^1.21.0",
+    "dayjs": "^1.11.23",
+    "echarts": "^5.6.0",
+    "ol": "^9.2.4",
+    "pinia": "^2.3.1",
+    "vue": "^3.5.44",
+    "vue-echarts": "^7.0.3",
+    "vue-router": "^4.6.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.43",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "@vitejs/plugin-vue": "^5.2.4",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^9.1.2",
+    "eslint-plugin-vue": "^9.33.0",
+    "less": "^4.9.1",
+    "prettier": "^3.9.10",
+    "typescript": "~5.5",
+    "vite": "^5.4.21",
+    "vue-eslint-parser": "^9.4.3",
+    "vue-tsc": "^2.2.12"
+  }
+}

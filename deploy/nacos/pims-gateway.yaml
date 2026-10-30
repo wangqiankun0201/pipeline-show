@@ -1,0 +1,16 @@
+# Nacos 配置：Data ID = pims-gateway.yaml，Group = DEFAULT_GROUP，命名空间 = pims
+# 部署时由流水线注入环境变量：PIMS_PROFILE=prod、NACOS_ADDR、NACOS_USERNAME、NACOS_PASSWORD、NACOS_NAMESPACE
+spring:
+  cloud:
+    sentinel:
+      transport:
+        dashboard: sentinel.dev.xnyqt.petrochina:8080
+
+pims:
+  auth:
+    # 生产环境必须开启梦想云用户中心令牌校验
+    enabled: true
+    # 测试环境 http://user.api.uat.pcep.cloud；正式环境 http://user.api.pcep.cloud（以用户中心实际地址为准）
+    user-center-url: http://user.api.pcep.cloud
+    current-user-path: /api/v2/sys/user/currentuser
+    cache-minutes: 5

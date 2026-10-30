@@ -1,0 +1,5 @@
+# 梦想云测试/正式环境：注册中心与配置中心使用 Nacos，环境差异配置维护在 Nacos（pims-gateway.yaml）
+spring:
+  config:
+    import:
+      - optional:nacos:${spring.application.name}.yaml

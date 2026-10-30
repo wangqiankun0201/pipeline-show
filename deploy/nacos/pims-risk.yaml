@@ -1,0 +1,15 @@
+# Nacos 配置：Data ID = pims-risk.yaml，Group = DEFAULT_GROUP，命名空间 = pims
+spring:
+  datasource:
+    url: jdbc:postgresql://pims.postgresql.dev.xnyqt.petrochina:5432/pims?currentSchema=pims_risk
+    username: pims
+    password: ${DB_PASSWORD}
+
+pims:
+  swagger:
+    enabled: false
+  risk:
+    # 计算公式接入后改为新模型编码（IRiskCalculateInterFace#getModelCode）
+    model-code: PENDING
+    default-evaluate-years: 5
+  # 不配置 url 时 OpenFeign 经 Nacos 服务发现调用 pims-corrosion / pims-gis

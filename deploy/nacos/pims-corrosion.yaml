@@ -1,0 +1,18 @@
+# Nacos 配置：Data ID = pims-corrosion.yaml，Group = DEFAULT_GROUP，命名空间 = pims
+spring:
+  datasource:
+    url: jdbc:postgresql://pims.postgresql.dev.xnyqt.petrochina:5432/pims?currentSchema=pims_corrosion
+    username: pims
+    password: ${DB_PASSWORD}
+
+pims:
+  swagger:
+    enabled: false
+  corrosion:
+    # 模型参数变更须同步更新模型版本号，参数库按版本隔离
+    model-name: 投运日起固定参数幂律模型
+    model-version: V2.0-fixed
+    # 仅峰汝线A2段、万卧线B段、万卧线C段使用后端固定 k/n；不允许重锚定和自定义指数
+    attention-ratio: 0.8
+    # 首次部署且检测记录为空时导入内置《内腐蚀数据.xlsx》；之后通过页面“导入内腐蚀数据”维护
+    seed-enabled: true

@@ -1,0 +1,66 @@
+server:
+  port: 9100
+
+spring:
+  application:
+    name: pims-gateway
+  profiles:
+    active: ${PIMS_PROFILE:local}
+  cloud:
+    nacos:
+      server-addr: ${NACOS_ADDR:nacos.dev.xnyqt.petrochina:8848}
+      username: ${NACOS_USERNAME:nacos}
+      password: ${NACOS_PASSWORD:}
+      discovery:
+        namespace: ${NACOS_NAMESPACE:pims}
+      config:
+        namespace: ${NACOS_NAMESPACE:pims}
+        file-extension: yaml
+        import-check:
+          enabled: false
+    sentinel:
+      transport:
+        dashboard: ${SENTINEL_DASHBOARD:}
+    gateway:
+      routes:
+        - id: pims-gis
+          uri: ${pims.route.gis-uri:lb://pims-gis}
+          predicates:
+            - Path=/api/gis/**
+          filters:
+            - StripPrefix=1
+        - id: pims-corrosion
+          uri: ${pims.route.corrosion-uri:lb://pims-corrosion}
+          predicates:
+            - Path=/api/corrosion/**
+          filters:
+            - StripPrefix=1
+        - id: pims-risk
+          uri: ${pims.route.risk-uri:lb://pims-risk}
+          predicates:
+            - Path=/api/risk/**
+          filters:
+            - StripPrefix=1
+      httpclient:
+        connect-timeout: 5000
+        response-timeout: 60s
+
+# 健康检查（PaaS 平台要求 /actuator/health）
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: never
+
+pims:
+  auth:
+    enabled: true
+    user-center-url: ${USER_CENTER_URL:http://user.api.dev.pcep.cloud}
+    current-user-path: /api/v2/sys/user/currentuser
+    cache-minutes: 5
+    whitelist:
+      - /actuator/**
+      - /api/*/v3/api-docs/**

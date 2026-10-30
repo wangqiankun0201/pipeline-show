@@ -1,0 +1,16 @@
+# 构建产物
+target/
+dist/
+node_modules/
+*.log
+logs/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.DS_Store
+
+# 本地环境
+*.local
+.env.*.local
