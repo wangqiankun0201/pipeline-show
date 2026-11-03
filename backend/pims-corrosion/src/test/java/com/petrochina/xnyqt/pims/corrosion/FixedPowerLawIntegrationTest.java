@@ -38,9 +38,9 @@ class FixedPowerLawIntegrationTest {
     @Autowired MockMvc mvc;
 
     @Test
-    void retainsSixSegmentsAndPredictsOnlyThreeWithExactFixedParameters() {
+    void retainsFiveSegmentsAndPredictsOnlyThreeWithExactFixedParameters() {
         List<CorrosionSegmentVO> segments = data.listSegments();
-        assertEquals(6, segments.size());
+        assertEquals(5, segments.size());
         assertEquals(3, data.getOverview().getPredictableCount());
         assertEquals(3, predictions.summarizeAll(5).size());
         for (CorrosionSegmentVO segment : segments) {
@@ -82,8 +82,8 @@ class FixedPowerLawIntegrationTest {
             request.setScenarioN(1.0);
             assertThrows(BusinessException.class, () -> predictions.predict(request));
         }
-        assertEquals(0.22517, FixedPowerLawModel.FENG_RU_A2.getK(), 0);
-        assertEquals(1.07087, FixedPowerLawModel.FENG_RU_A2.getN(), 0);
+        assertEquals(0.22517, FixedPowerLawModel.FENG_RU_A.getK(), 0);
+        assertEquals(1.07087, FixedPowerLawModel.FENG_RU_A.getN(), 0);
         assertEquals(0.01697, FixedPowerLawModel.WAN_WO_B.getK(), 0);
         assertEquals(1.72263, FixedPowerLawModel.WAN_WO_B.getN(), 0);
         assertEquals(0.05313, FixedPowerLawModel.WAN_WO_C.getK(), 0);

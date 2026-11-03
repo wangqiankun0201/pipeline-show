@@ -54,7 +54,7 @@ const loading = ref(false)
 const importing = ref(false)
 const inspectionsLoading = ref(false)
 const error = ref('')
-const forecastNames = ['峰汝线A2段', '万卧线B段', '万卧线C段']
+const forecastNames = ['峰汝线A段', '万卧线B段', '万卧线C段']
 const forecastSegments = computed(() => segments.value.filter(s => forecastNames.includes(s.segmentName)))
 const currentReport = computed(() => reports.value.find(r => r.segmentId === selectedId.value))
 const reportOptions = computed(() => reports.value.map(r => ({ label: r.segmentName, value: r.segmentId })))

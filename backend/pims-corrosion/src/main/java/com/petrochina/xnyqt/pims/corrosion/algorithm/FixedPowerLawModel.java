@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 /** 用户指定参数，按段名识别；不得从内检重新拟合或由配置覆盖。 */
 public enum FixedPowerLawModel {
-    FENG_RU_A2("峰汝线A2段", 0.22517, 1.07087),
+    FENG_RU_A("峰汝线A段", 0.22517, 1.07087),
     WAN_WO_B("万卧线B段", 0.01697, 1.72263),
     WAN_WO_C("万卧线C段", 0.05313, 1.29786);
 

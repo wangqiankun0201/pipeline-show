@@ -19,7 +19,7 @@ public class GammaRiskService {
     private static final String VERSION = "CONDITIONAL_GAMMA_V1";
     private static final Map<String, double[]> PARAMETERS = new LinkedHashMap<>();
     static {
-        PARAMETERS.put("峰汝线A2段", new double[]{0.22517, 1.07087});
+        PARAMETERS.put("峰汝线A段", new double[]{0.22517, 1.07087});
         PARAMETERS.put("万卧线B段", new double[]{0.01697, 1.72263});
         PARAMETERS.put("万卧线C段", new double[]{0.05313, 1.29786});
     }
@@ -68,7 +68,7 @@ public class GammaRiskService {
                 .filter(s -> request.getSegmentId().equals(s.getSegmentId())).findFirst()
                 .orElseThrow(() -> new BusinessException("管段不存在"));
         double[] parameters = PARAMETERS.get(segment.getSegmentName());
-        if (parameters == null) { throw new BusinessException("Gamma模型仅支持峰汝线A2段、万卧线B段及万卧线C段"); }
+        if (parameters == null) { throw new BusinessException("Gamma模型仅支持峰汝线A段、万卧线B段及万卧线C段"); }
         List<InspectionDTO> inspections = validInspections(segment);
         InspectionDTO latest = inspections.get(inspections.size() - 1);
         GammaPredictionVO vo = new GammaPredictionVO();

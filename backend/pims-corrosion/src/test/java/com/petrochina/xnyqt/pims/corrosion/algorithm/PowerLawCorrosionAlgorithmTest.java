@@ -18,7 +18,7 @@ class PowerLawCorrosionAlgorithmTest {
 
     @Test
     void shouldMatchFengruA2Example() {
-        //技术说明 4.2：峰汝线A2段，投运 1990-10-01，内检 2023-03-14，壁厚 11mm，最大深度 85%
+        //技术说明 4.2：峰汝线A段，投运 1990-10-01，内检 2023-03-14，壁厚 11mm，最大深度 85%
         double t = DateUtil.yearsBetween(LocalDate.of(1990, 10, 1), LocalDate.of(2023, 3, 14));
         double d0 = PowerLawCorrosionAlgorithm.initialDepth(11, 85);
         double k = PowerLawCorrosionAlgorithm.kValue(d0, t, 1.0);

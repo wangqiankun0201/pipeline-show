@@ -5,8 +5,8 @@
 const DAYS_PER_YEAR = 365.2422
 
 const SEGMENTS = {
-  5: {
-    segmentId: 5, segmentName: '峰汝线A2段', pipelineName: '峰汝线',
+  4: {
+    segmentId: 4, segmentName: '峰汝线A段', pipelineName: '峰汝线',
     commissionDate: '1990-10-01', wallThicknessMm: 11, inspectionDate: '2023-03-14',
     inspectionDepthMm: 9.35, kValue: 0.22517, n: 1.07087,
     history: [
@@ -212,7 +212,7 @@ export default async request => {
     return json(400, { code: 'error', msg: '请求体不是有效 JSON', data: null })
   }
   const segment = SEGMENTS[Number(body.segmentId)]
-  if (!segment) return json(400, { code: 'error', msg: 'Gamma模型仅支持峰汝线A2段、万卧线B段及万卧线C段', data: null })
+  if (!segment) return json(400, { code: 'error', msg: 'Gamma模型仅支持峰汝线A段、万卧线B段及万卧线C段', data: null })
   const theta = body.theta == null ? 0.2 : Number(body.theta)
   const sampleCount = body.sampleCount == null ? 100000 : Number(body.sampleCount)
   const seed = body.seed == null ? 20261029 : Number(body.seed)

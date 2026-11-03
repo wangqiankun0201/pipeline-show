@@ -133,7 +133,7 @@ async function calculate() {
 onMounted(async () => {
   try {
     const segments = await corrosionApi.listSegments()
-    const names = ['峰汝线A2段', '万卧线B段', '万卧线C段']
+    const names = ['峰汝线A段', '万卧线B段', '万卧线C段']
     options.value = segments.filter(s => names.includes(s.segmentName)).sort((a, b) => names.indexOf(a.segmentName) - names.indexOf(b.segmentName)).map(s => ({ value: s.segmentId, label: s.segmentName }))
     segmentId.value = options.value.find(s => s.value === Number(route.query.segmentId))?.value ?? options.value[0]?.value
     await calculate()

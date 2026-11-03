@@ -89,7 +89,7 @@ class GammaRiskTest {
 
     private CorrosionSegmentDTO segment() {
         CorrosionSegmentDTO s = new CorrosionSegmentDTO();
-        s.setSegmentId(5L); s.setSegmentName("峰汝线A2段"); s.setPipelineName("峰汝线");
+        s.setSegmentId(4L); s.setSegmentName("峰汝线A段"); s.setPipelineName("峰汝线");
         s.setCommissionDate(LocalDate.of(1990,10,1)); s.setWallThicknessMm(11.0);
         return s;
     }
@@ -99,12 +99,12 @@ class GammaRiskTest {
         return i;
     }
     private GammaPredictRequestDTO request() {
-        GammaPredictRequestDTO r = new GammaPredictRequestDTO(); r.setSegmentId(5L); r.setSampleCount(1000); return r;
+        GammaPredictRequestDTO r = new GammaPredictRequestDTO(); r.setSegmentId(4L); r.setSampleCount(1000); return r;
     }
     private GammaRiskService service(CorrosionSegmentDTO s, InspectionDTO... records) {
         CorrosionFeignClient client = mock(CorrosionFeignClient.class);
         when(client.listSegments()).thenReturn(ApiResult.success(Collections.singletonList(s)));
-        when(client.listInspections(5L)).thenReturn(ApiResult.success(Arrays.asList(records)));
+        when(client.listInspections(4L)).thenReturn(ApiResult.success(Arrays.asList(records)));
         return new GammaRiskService(client, algorithm);
     }
 
@@ -167,7 +167,7 @@ class GammaRiskTest {
         CorrosionSegmentDTO b = segment(); b.setSegmentId(15L); b.setSegmentName("万卧线B段");
         CorrosionSegmentDTO c = segment(); c.setSegmentId(16L); c.setSegmentName("万卧线C段");
         when(client.listSegments()).thenReturn(ApiResult.success(Arrays.asList(c,b,a)));
-        for (long id : new long[]{5,15,16}) {
+        for (long id : new long[]{4,15,16}) {
             when(client.listInspections(id)).thenReturn(ApiResult.success(Collections.singletonList(
                     inspection(LocalDate.of(2023,3,14), 85))));
         }
