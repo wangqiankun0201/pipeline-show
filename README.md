@@ -61,13 +61,13 @@ cd frontend/pims-web && npm install && npm run dev
 
 浏览器访问 http://localhost:5173 。各服务的 Swagger 文档地址为 `http://localhost:910x/swagger-ui/index.html`。
 
-启动时 `pims-corrosion` 会自动导入内置的《内腐蚀数据.xlsx》，`pims-gis` 会写入 6 个管段的**示意坐标**。
+启动时 `pims-corrosion` 会自动导入内置的《内腐蚀数据.xlsx》，`pims-gis` 会写入 6 个管段的**实测坐标**（由《真实管线成果表》的 CGCS2000 高斯-克吕格坐标反算为 WGS84）。
 
 ## 当前数据与待办
 
-1. **GIS 坐标为示意数据**：提供的资料中没有管道坐标，目前按万州地区的走向绘制了示意线（页面会标注“示意坐标”）。拿到正式 GIS 数据后，按 `deploy/templates/pipe-segment-gis-template.geojson` 的格式（WGS84，`properties.segmentId` 对应管段ID）在页面“导入GIS数据”即可替换。
+1. **GIS 坐标为实测数据**：6 个管段已由《真实管线成果表》（万州采输气作业区）的逐桩坐标反算为 WGS84 并写入数据库，`coordStatus` 为 `SURVEYED`。峰汝线成果表只有 A、B 两段，平台展示的 A1/A2/B 三段按原 A2:B 里程比例（45.05%）在 14.0 km 处切分 B 段成果表，切分点为假设，需现场确认。后续更新仍可在页面“导入GIS数据”按 `deploy/templates/pipe-segment-gis-template.geojson` 的格式（WGS84，`properties.segmentId` 对应管段ID）整体替换。
 2. **腐蚀穿透模型**：已接入最新内检条件下的 Gamma 增量模型，默认 θ=0.2 mm，提供解析上尾概率和固定种子蒙特卡洛校核。θ 尚未由现场样本标定，结果不等同综合事故概率。旧版因素评价接口保留兼容。
-3. **内网底图**：`deploy/nacos/pims-gis.yaml` 已给出天地图配置（需申请 tk）。本地默认使用 OSM、CARTO 和 Esri 的互联网瓦片。
+3. **底图**：默认使用 Esri 的街道、浅色、深色和影像四套瓦片（OSM、CARTO 在部分网络会被阻断，导致底图空白）。内网可改用 `deploy/nacos/pims-gis.yaml` 里的天地图配置（需申请 tk）。
 4. 腐蚀模型的使用边界见页面提示和《技术说明》：结果仅用于趋势情景推演，不能单独作为停输或维修决策依据。
 
 详见 [docs/设计说明.md](docs/设计说明.md)、[docs/部署说明.md](docs/部署说明.md)、[docs/接口文档.md](docs/接口文档.md)。

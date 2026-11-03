@@ -1,0 +1,4 @@
+# antiword 导出的中间文本，由 .doc 重新生成
+work/*.txt
+__pycache__/
+*.pyc

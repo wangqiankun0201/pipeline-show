@@ -1,0 +1,65 @@
+[build]
+  publish = "dist"
+  command = "npm run build"
+  environment = { VITE_AUTH_ENABLED = "false" }
+
+[functions]
+  directory = "netlify/functions"
+
+# 风险计算：静态演示函数
+[[redirects]]
+  from = "/api/risk/gamma/predict"
+  to = "/.netlify/functions/gamma-predict"
+  status = 200
+  force = true
+
+# 只读业务数据：构建时导入的演示快照
+[[redirects]]
+  from = "/api/gis/segments/geojson"
+  to = "/demo/gis-geojson.json"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/gis/segments"
+  to = "/demo/gis-segments.json"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/gis/map/config"
+  to = "/demo/gis-map-config.json"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/corrosion/segments"
+  to = "/demo/corrosion-segments.json"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/corrosion/power-law-report"
+  to = "/demo/corrosion-report.json"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/corrosion/segments/:id/inspections"
+  to = "/demo/inspections-:id.json"
+  status = 200
+  force = true
+
+# 未提供演示数据的接口明确返回 JSON 404
+[[redirects]]
+  from = "/api/*"
+  to = "/demo/not-found.json"
+  status = 404
+  force = true
+
+# 单页应用回退
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false

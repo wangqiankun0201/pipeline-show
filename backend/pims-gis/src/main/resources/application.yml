@@ -73,16 +73,18 @@ pims:
     basemaps:
       - key: standard
         name: 标准地图
-        url: https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png
-        attribution: © OpenStreetMap contributors
+        url: https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}
+        attribution: © Esri
       - key: light
         name: 浅色地图
-        url: https://{a-d}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png
-        attribution: © OpenStreetMap contributors © CARTO
+        url: https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}
+        annotationUrl: https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}
+        attribution: © Esri
       - key: dark
         name: 深色地图
-        url: https://{a-d}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png
-        attribution: © OpenStreetMap contributors © CARTO
+        url: https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}
+        annotationUrl: https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}
+        attribution: © Esri
       - key: image
         name: 影像地图
         url: https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}

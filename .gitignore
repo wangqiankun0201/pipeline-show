@@ -14,3 +14,6 @@ logs/
 # 本地环境
 *.local
 .env.*.local
+
+# Netlify 部署状态
+.netlify/
